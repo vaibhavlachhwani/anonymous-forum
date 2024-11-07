@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.vaibhav</groupId>
-    <artifactId>anonymous-forum</artifactId>
+    <artifactId>anonymous-forum-backend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>anonymous-forum</name>
     <description>anonymous-forum</description>
