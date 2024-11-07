@@ -1,11 +1,13 @@
 package com.vaibhav.anonymousforum.services;
 
+import com.vaibhav.anonymousforum.dtos.PostDTO;
 import com.vaibhav.anonymousforum.entities.Post;
 import com.vaibhav.anonymousforum.repositories.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PostService {
@@ -13,15 +15,20 @@ public class PostService {
     @Autowired
     private PostRepository postRepository;
 
-    public List<Post> getAllPosts() {
-        return postRepository.findAll();
+    public List<PostDTO> getAllPosts() {
+        return postRepository.findAll().stream()
+                .map(PostDTO::new)
+                .collect(Collectors.toList());
     }
 
-    public Post getPostById(Long id) {
-        return postRepository.findById(id).orElse(null);
+    public PostDTO getPostById(Long id) {
+        return postRepository.findById(id)
+                .map(PostDTO::new)
+                .orElse(null);
     }
 
-    public Post createPost(Post post) {
-        return postRepository.save(post);
+    public PostDTO createPost(Post post) {
+        Post savedPost = postRepository.save(post);
+        return new PostDTO(savedPost);
     }
 }
