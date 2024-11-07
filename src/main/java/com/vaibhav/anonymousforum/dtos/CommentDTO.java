@@ -1,6 +1,5 @@
 package com.vaibhav.anonymousforum.dtos;
 
-import com.vaibhav.anonymousforum.controllers.UserSummaryDTO;
 import com.vaibhav.anonymousforum.entities.Comment;
 
 public class CommentDTO {
