@@ -1,5 +1,6 @@
 package com.vaibhav.anonymousforum.controllers;
 
+import com.vaibhav.anonymousforum.dtos.CommentDTO;
 import com.vaibhav.anonymousforum.entities.Comment;
 import com.vaibhav.anonymousforum.services.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,21 +19,21 @@ public class CommentController {
 
     // Get all comments
     @GetMapping
-    public List<Comment> getAllComments() {
+    public List<CommentDTO> getAllComments() {
         return commentService.getAllComments();
     }
 
     // Get a comment by ID
     @GetMapping("/{id}")
-    public ResponseEntity<Comment> getCommentById(@PathVariable Long id) {
-        Comment comment = commentService.getCommentById(id);
+    public ResponseEntity<CommentDTO> getCommentById(@PathVariable Long id) {
+        CommentDTO comment = commentService.getCommentById(id);
         return comment != null ? ResponseEntity.ok(comment) : ResponseEntity.notFound().build();
     }
 
     // Create a new comment
     @PostMapping
-    public ResponseEntity<Comment> createComment(@RequestBody Comment comment) {
-        Comment createdComment = commentService.createComment(comment);
+    public ResponseEntity<CommentDTO> createComment(@RequestBody Comment comment) {
+        CommentDTO createdComment = commentService.createComment(comment);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdComment);
     }
 }
