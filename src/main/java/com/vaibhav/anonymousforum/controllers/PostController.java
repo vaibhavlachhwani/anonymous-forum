@@ -1,5 +1,6 @@
 package com.vaibhav.anonymousforum.controllers;
 
+import com.vaibhav.anonymousforum.dtos.PostDTO;
 import com.vaibhav.anonymousforum.entities.Post;
 import com.vaibhav.anonymousforum.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,21 +19,21 @@ public class PostController {
 
     // Get all posts
     @GetMapping
-    public List<Post> getAllPosts() {
+    public List<PostDTO> getAllPosts() {
         return postService.getAllPosts();
     }
 
     // Get a post by ID
     @GetMapping("/{id}")
-    public ResponseEntity<Post> getPostById(@PathVariable Long id) {
-        Post post = postService.getPostById(id);
+    public ResponseEntity<PostDTO> getPostById(@PathVariable Long id) {
+        PostDTO post = postService.getPostById(id);
         return post != null ? ResponseEntity.ok(post) : ResponseEntity.notFound().build();
     }
 
     // Create a new post
     @PostMapping
-    public ResponseEntity<Post> createPost(@RequestBody Post post) {
-        Post createdPost = postService.createPost(post);
+    public ResponseEntity<PostDTO> createPost(@RequestBody Post post) {
+        PostDTO createdPost = postService.createPost(post);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdPost);
     }
 }
