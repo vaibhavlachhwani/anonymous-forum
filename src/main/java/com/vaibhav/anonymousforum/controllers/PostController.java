@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = "*") // Allow CORS for this method
 @RequestMapping("/api/posts")
 public class PostController {
 
