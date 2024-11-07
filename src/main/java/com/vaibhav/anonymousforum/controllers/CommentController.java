@@ -1,4 +1,4 @@
-package com.vaibhav.anonymousforum.services.controllers;
+package com.vaibhav.anonymousforum.controllers;
 
 import com.vaibhav.anonymousforum.entities.Comment;
 import com.vaibhav.anonymousforum.services.CommentService;
