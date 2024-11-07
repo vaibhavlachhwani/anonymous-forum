@@ -1,5 +1,6 @@
 package com.vaibhav.anonymousforum.controllers;
 
+import com.vaibhav.anonymousforum.dtos.UserDTO;
 import com.vaibhav.anonymousforum.entities.User;
 import com.vaibhav.anonymousforum.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,18 +20,18 @@ public class UserController {
     private UserService userService;
 
     @GetMapping
-    public List<User> getAllUsers() {
+    public List<UserDTO> getAllUsers() {
         return userService.getAllUsers();
     }
 
     @GetMapping("/{id}")
-    public User getUserById(Long id) {
+    public UserDTO getUserById(@PathVariable Long id) {
         return userService.getUserById(id);
     }
 
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user) {
-        User createdUser = userService.createUser(user);
+    public ResponseEntity<UserDTO> createUser(@RequestBody User user) {
+        UserDTO createdUser = userService.createUser(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
     }
 }
