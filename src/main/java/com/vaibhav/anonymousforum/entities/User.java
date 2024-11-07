@@ -2,6 +2,7 @@ package com.vaibhav.anonymousforum.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -16,7 +17,7 @@ public class User {
     private String username;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Post> posts;
+    private List<Post> posts = new ArrayList<>();
 
     public User() {
     }
