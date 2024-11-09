@@ -1,14 +1,33 @@
 package com.vaibhav.anonymousforum.dtos;
 
 public class CommentRequestDTO {
+    private String username;
+    private String password;
     private String content;
-    private Long userId; // ID of the user making the comment
 
-    public CommentRequestDTO() {}
+    public CommentRequestDTO() {
+    }
 
-    public CommentRequestDTO(String content, Long userId) {
+    public CommentRequestDTO(String username, String password, String content) {
+        this.username = username;
+        this.password = password;
         this.content = content;
-        this.userId = userId;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getContent() {
@@ -17,13 +36,5 @@ public class CommentRequestDTO {
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
     }
 }
