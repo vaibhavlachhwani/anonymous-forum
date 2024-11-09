@@ -3,6 +3,7 @@ package com.vaibhav.anonymousforum.controllers;
 import com.vaibhav.anonymousforum.dtos.CommentDTO;
 import com.vaibhav.anonymousforum.dtos.CommentRequestDTO;
 import com.vaibhav.anonymousforum.dtos.PostDTO;
+import com.vaibhav.anonymousforum.dtos.PostRequestDTO;
 import com.vaibhav.anonymousforum.entities.Comment;
 import com.vaibhav.anonymousforum.entities.Post;
 import com.vaibhav.anonymousforum.entities.User;
@@ -10,6 +11,7 @@ import com.vaibhav.anonymousforum.repositories.CommentRepository;
 import com.vaibhav.anonymousforum.repositories.PostRepository;
 import com.vaibhav.anonymousforum.repositories.UserRepository;
 import com.vaibhav.anonymousforum.services.PostService;
+import com.vaibhav.anonymousforum.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +27,9 @@ public class PostController {
 
     @Autowired
     private PostService postService;
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private PostRepository postRepository;
@@ -48,11 +53,15 @@ public class PostController {
         return post != null ? ResponseEntity.ok(post) : ResponseEntity.notFound().build();
     }
 
-    // Create a new post
     @PostMapping
-    public ResponseEntity<PostDTO> createPost(@RequestBody Post post) {
-        PostDTO createdPost = postService.createPost(post);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdPost);
+    public ResponseEntity<?> createPost(@RequestBody PostRequestDTO postRequestDTO) {
+        boolean isAuthenticated = userService.verifyUser(postRequestDTO.getUserId(), postRequestDTO.getPassword());
+        if (!isAuthenticated) {
+            return ResponseEntity.status(401).body("Authentication failed. Invalid user ID or password.");
+        }
+
+        Post post = postService.createPost(postRequestDTO);
+        return ResponseEntity.ok(post);
     }
 
     @PostMapping("/{id}/comments")

@@ -5,6 +5,18 @@ public class PostRequestDTO {
     private String content;
     private String username;
     private String password;
+    private long userId;
+
+    public PostRequestDTO() {
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
 
     public String getTitle() {
         return title;

@@ -4,6 +4,7 @@ public class CommentRequestDTO {
     private String username;
     private String password;
     private String content;
+    private long userId;
 
     public CommentRequestDTO() {
     }
@@ -12,6 +13,14 @@ public class CommentRequestDTO {
         this.username = username;
         this.password = password;
         this.content = content;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 
     public String getUsername() {

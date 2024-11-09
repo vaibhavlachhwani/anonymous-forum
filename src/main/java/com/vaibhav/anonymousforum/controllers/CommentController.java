@@ -1,6 +1,7 @@
 package com.vaibhav.anonymousforum.controllers;
 
 import com.vaibhav.anonymousforum.dtos.CommentDTO;
+import com.vaibhav.anonymousforum.dtos.CommentRequestDTO;
 import com.vaibhav.anonymousforum.entities.Comment;
 import com.vaibhav.anonymousforum.services.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,10 +32,14 @@ public class CommentController {
         return comment != null ? ResponseEntity.ok(comment) : ResponseEntity.notFound().build();
     }
 
-    // Create a new comment
     @PostMapping
-    public ResponseEntity<CommentDTO> createComment(@RequestBody Comment comment) {
-        CommentDTO createdComment = commentService.createComment(comment);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdComment);
+    public ResponseEntity<?> createComment(@RequestBody CommentRequestDTO commentRequest) {
+        boolean isAuthenticated = userService.verifyUser(commentRequest.getUserId(), commentRequest.getPassword());
+        if (!isAuthenticated) {
+            return ResponseEntity.status(401).body("Authentication failed. Invalid user ID or password.");
+        }
+
+        Comment comment = commentService.createComment(commentRequest);
+        return ResponseEntity.ok(comment);
     }
 }
