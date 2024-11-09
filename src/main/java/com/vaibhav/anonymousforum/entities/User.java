@@ -1,6 +1,7 @@
 package com.vaibhav.anonymousforum.entities;
 
 import jakarta.persistence.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,21 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Post> posts = new ArrayList<>();
 
+    private String password;
+
     public User() {
+    }
+
+    public User(Long id, String username, List<Post> posts, String password) {
+        this.id = id;
+        this.username = username;
+        this.posts = posts;
+        setPassword(password);
+    }
+
+    public User(String password, String username) {
+        setPassword(password);
+        this.username = username;
     }
 
     public User(Long id, String username, List<Post> posts) {
@@ -52,12 +67,22 @@ public class User {
         this.posts = posts;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String plainPassword) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        this.password = encoder.encode(plainPassword);
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", posts=" + posts +
+                ", password='" + password + '\'' +
                 '}';
     }
 }
