@@ -41,6 +41,7 @@ public class PostService {
 
     public Post createPost(PostRequestDTO postRequest) {
         Post post = new Post();
+        post.setTitle(postRequest.getTitle());
         post.setContent(postRequest.getContent());
         post.setUser(userService.getUserObjByUsername(postRequest.getUsername()));
         return postRepository.save(post);
