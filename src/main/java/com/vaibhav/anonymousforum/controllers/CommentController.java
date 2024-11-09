@@ -38,7 +38,7 @@ public class CommentController {
 
     @PostMapping
     public ResponseEntity<?> createComment(@RequestBody CommentRequestDTO commentRequest) {
-        boolean isAuthenticated = userService.verifyUser(commentRequest.getUserId(), commentRequest.getPassword());
+        boolean isAuthenticated = userService.verifyUser(commentRequest.getUsername(), commentRequest.getPassword());
         if (!isAuthenticated) {
             return ResponseEntity.status(401).body("Authentication failed. Invalid user ID or password.");
         }

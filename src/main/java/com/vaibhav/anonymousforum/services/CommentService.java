@@ -38,7 +38,7 @@ public class CommentService {
     public Comment createComment(CommentRequestDTO commentRequest) {
         Comment comment = new Comment();
         comment.setContent(commentRequest.getContent());
-        comment.setUser(userService.getUserObjById((commentRequest.getUserId())));
+        comment.setUser(userService.getUserObjByUsername((commentRequest.getUsername())));
         return commentRepository.save(comment);
     }
 }

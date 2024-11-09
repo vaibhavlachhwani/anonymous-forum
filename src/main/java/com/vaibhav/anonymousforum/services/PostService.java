@@ -42,7 +42,7 @@ public class PostService {
     public Post createPost(PostRequestDTO postRequest) {
         Post post = new Post();
         post.setContent(postRequest.getContent());
-        post.setUser(userService.getUserObjById(postRequest.getUserId()));
+        post.setUser(userService.getUserObjByUsername(postRequest.getUsername()));
         return postRepository.save(post);
     }
 }

@@ -55,7 +55,7 @@ public class PostController {
 
     @PostMapping
     public ResponseEntity<?> createPost(@RequestBody PostRequestDTO postRequestDTO) {
-        boolean isAuthenticated = userService.verifyUser(postRequestDTO.getUserId(), postRequestDTO.getPassword());
+        boolean isAuthenticated = userService.verifyUser(postRequestDTO.getUsername(), postRequestDTO.getPassword());
         if (!isAuthenticated) {
             return ResponseEntity.status(401).body("Authentication failed. Invalid user ID or password.");
         }
@@ -64,27 +64,27 @@ public class PostController {
         return ResponseEntity.ok(post);
     }
 
-    @PostMapping("/{id}/comments")
-    public ResponseEntity<CommentDTO> addCommentToPost(@PathVariable Long id, @RequestBody CommentRequestDTO commentRequestDTO) {
-        Optional<Post> postOptional = postRepository.findById(id);
-        if (!postOptional.isPresent()) {
-            return ResponseEntity.notFound().build();
-        }
-
-        Post post = postOptional.get();
-
-        // Assume we have a method to get the current user
-        User user = userRepository.findById(commentRequestDTO.getUserId()).orElseThrow(() -> new RuntimeException("User not found"));
-
-        // Create and save the new comment
-        Comment comment = new Comment();
-        comment.setContent(commentRequestDTO.getContent());
-        comment.setPost(post);
-        comment.setUser(user);  // Set the user who made the comment
-        comment = commentRepository.save(comment);
-
-        // Convert saved comment to CommentDTO
-        CommentDTO commentDTO = new CommentDTO(comment);
-        return ResponseEntity.ok(commentDTO);
-    }
+//    @PostMapping("/{id}/comments")
+//    public ResponseEntity<CommentDTO> addCommentToPost(@PathVariable Long id, @RequestBody CommentRequestDTO commentRequestDTO) {
+//        Optional<Post> postOptional = postRepository.findById(id);
+//        if (!postOptional.isPresent()) {
+//            return ResponseEntity.notFound().build();
+//        }
+//
+//        Post post = postOptional.get();
+//
+//        // Assume we have a method to get the current user
+//        User user = userRepository.findById(commentRequestDTO.getUserId()).orElseThrow(() -> new RuntimeException("User not found"));
+//
+//        // Create and save the new comment
+//        Comment comment = new Comment();
+//        comment.setContent(commentRequestDTO.getContent());
+//        comment.setPost(post);
+//        comment.setUser(user);  // Set the user who made the comment
+//        comment = commentRepository.save(comment);
+//
+//        // Convert saved comment to CommentDTO
+//        CommentDTO commentDTO = new CommentDTO(comment);
+//        return ResponseEntity.ok(commentDTO);
+//    }
 }
