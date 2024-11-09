@@ -36,4 +36,13 @@ public class UserService {
         User savedUser = new User(userRequest.getUsername(), userRequest.getPassword());
         userRepository.save(savedUser);
     }
+
+    public boolean verifyUser(Long userId, String plainPassword) {
+        User user = userRepository.findById(userId).orElse(null);
+        if (user == null) {
+            return false;
+        }
+        // Check if provided password matches the stored hashed password
+        return passwordEncoder.matches(plainPassword, user.getPassword());
+    }
 }
