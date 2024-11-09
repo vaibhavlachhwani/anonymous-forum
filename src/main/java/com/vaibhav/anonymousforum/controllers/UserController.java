@@ -1,6 +1,7 @@
 package com.vaibhav.anonymousforum.controllers;
 
 import com.vaibhav.anonymousforum.dtos.UserDTO;
+import com.vaibhav.anonymousforum.dtos.UserRequestDTO;
 import com.vaibhav.anonymousforum.entities.User;
 import com.vaibhav.anonymousforum.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,5 +35,10 @@ public class UserController {
     public ResponseEntity<UserDTO> createUser(@RequestBody User user) {
         UserDTO createdUser = userService.createUser(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
+    }
+
+    @PostMapping("/register")
+    public User registerUser(@RequestBody UserRequestDTO userRequest) {
+        return new User(userRequest.getUsername(), userRequest.getPassword());
     }
 }
