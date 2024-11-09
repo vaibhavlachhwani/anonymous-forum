@@ -19,6 +19,8 @@ public class PostService {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private UserService userService;
 
     public List<PostDTO> getAllPosts() {
         return postRepository.findAll().stream()
@@ -37,10 +39,11 @@ public class PostService {
         return new PostDTO(savedPost);
     }
 
-    public Post createPost(PostRequestDTO postRequestDTO) {
-        Post post = new Post(postRequestDTO.getTitle(), postRequestDTO.getContent(),
-                userRepository.findByUsername(postRequestDTO.getUsername()));
-
-        return post;
+    public Post createPost(PostRequestDTO postRequest) {
+        Post post = new Post();
+        post.setContent(postRequest.getContent());
+        post.setUser(userService.getUserObjById(postRequest.getUserId()));
+        return postRepository.save(post);
     }
 }
+

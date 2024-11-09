@@ -4,6 +4,7 @@ import com.vaibhav.anonymousforum.dtos.CommentDTO;
 import com.vaibhav.anonymousforum.dtos.CommentRequestDTO;
 import com.vaibhav.anonymousforum.entities.Comment;
 import com.vaibhav.anonymousforum.services.CommentService;
+import com.vaibhav.anonymousforum.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,9 @@ public class CommentController {
 
     @Autowired
     private CommentService commentService;
+
+    @Autowired
+    private UserService userService;
 
     // Get all comments
     @GetMapping
