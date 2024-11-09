@@ -35,15 +35,4 @@ public class CommentController {
         CommentDTO comment = commentService.getCommentById(id);
         return comment != null ? ResponseEntity.ok(comment) : ResponseEntity.notFound().build();
     }
-
-    @PostMapping
-    public ResponseEntity<?> createComment(@RequestBody CommentRequestDTO commentRequest) {
-        boolean isAuthenticated = userService.verifyUser(commentRequest.getUsername(), commentRequest.getPassword());
-        if (!isAuthenticated) {
-            return ResponseEntity.status(401).body("Authentication failed. Invalid user ID or password.");
-        }
-
-        Comment comment = commentService.createComment(commentRequest);
-        return ResponseEntity.ok(comment);
-    }
 }

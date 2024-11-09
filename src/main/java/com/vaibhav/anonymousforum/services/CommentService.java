@@ -3,6 +3,8 @@ package com.vaibhav.anonymousforum.services;
 import com.vaibhav.anonymousforum.dtos.CommentDTO;
 import com.vaibhav.anonymousforum.dtos.CommentRequestDTO;
 import com.vaibhav.anonymousforum.entities.Comment;
+import com.vaibhav.anonymousforum.entities.Post;
+import com.vaibhav.anonymousforum.entities.User;
 import com.vaibhav.anonymousforum.repositories.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,10 +37,11 @@ public class CommentService {
         return new CommentDTO(savedComment);
     }
 
-    public Comment createComment(CommentRequestDTO commentRequest) {
+    public Comment createComment(String content, Post post, User user) {
         Comment comment = new Comment();
-        comment.setContent(commentRequest.getContent());
-        comment.setUser(userService.getUserObjByUsername((commentRequest.getUsername())));
+        comment.setContent(content);
+        comment.setPost(post);
+        comment.setUser(user);
         return commentRepository.save(comment);
     }
 }
