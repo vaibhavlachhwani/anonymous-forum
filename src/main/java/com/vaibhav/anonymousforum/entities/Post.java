@@ -28,6 +28,13 @@ public class Post {
     public Post() {
     }
 
+    public Post(String title, String content, User user) {
+        this.title = title;
+        this.content = content;
+        this.user = user;
+        this.comments = new ArrayList<>();
+    }
+
     public Post(Long id, String title, String content, User user, List<Comment> comments) {
         this.id = id;
         this.title = title;

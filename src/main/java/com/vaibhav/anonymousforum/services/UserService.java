@@ -1,6 +1,7 @@
 package com.vaibhav.anonymousforum.services;
 
 import com.vaibhav.anonymousforum.dtos.UserDTO;
+import com.vaibhav.anonymousforum.dtos.UserRequestDTO;
 import com.vaibhav.anonymousforum.entities.User;
 import com.vaibhav.anonymousforum.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,5 +35,10 @@ public class UserService {
     public UserDTO createUser(User user) {
         User savedUser = userRepository.save(user);
         return new UserDTO(savedUser);
+    }
+
+    public void createUser(UserRequestDTO userRequest) {
+        User savedUser = new User(userRequest.getUsername(), userRequest.getPassword());
+        userRepository.save(savedUser);
     }
 }

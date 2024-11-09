@@ -6,9 +6,12 @@ public class UserRequestDTO {
     private String username;
     private String password;
 
-    public UserRequestDTO(User user) {
-        this.username = user.getUsername();
-        this.password = user.getPassword();
+    public UserRequestDTO() {
+    }
+
+    public UserRequestDTO(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 
     public String getUsername() {

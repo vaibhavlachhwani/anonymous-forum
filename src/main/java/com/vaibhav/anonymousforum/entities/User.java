@@ -32,7 +32,7 @@ public class User {
         setPassword(password);
     }
 
-    public User(String password, String username) {
+    public User(String username, String password) {
         setPassword(password);
         this.username = username;
     }

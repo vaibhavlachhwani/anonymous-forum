@@ -38,7 +38,8 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public User registerUser(@RequestBody UserRequestDTO userRequest) {
-        return new User(userRequest.getUsername(), userRequest.getPassword());
+    public ResponseEntity<?> registerUser(@RequestBody UserRequestDTO userRequest) {
+        userService.createUser(userRequest);
+        return ResponseEntity.ok("User registered successfully");
     }
 }
