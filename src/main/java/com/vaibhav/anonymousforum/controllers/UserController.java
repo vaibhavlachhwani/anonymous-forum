@@ -2,13 +2,9 @@ package com.vaibhav.anonymousforum.controllers;
 
 import com.vaibhav.anonymousforum.dtos.UserDTO;
 import com.vaibhav.anonymousforum.dtos.UserRequestDTO;
-import com.vaibhav.anonymousforum.entities.User;
 import com.vaibhav.anonymousforum.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,15 +27,9 @@ public class UserController {
         return userService.getUserById(id);
     }
 
-    @PostMapping
-    public ResponseEntity<UserDTO> createUser(@RequestBody User user) {
-        UserDTO createdUser = userService.createUser(user);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
-    }
-
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody UserRequestDTO userRequest) {
-        userService.createUser(userRequest);
+        userService.registerUser(userRequest);
         return ResponseEntity.ok("User registered successfully");
     }
 }

@@ -32,12 +32,7 @@ public class UserService {
                 .orElse(null);
     }
 
-    public UserDTO createUser(User user) {
-        User savedUser = userRepository.save(user);
-        return new UserDTO(savedUser);
-    }
-
-    public void createUser(UserRequestDTO userRequest) {
+    public void registerUser(UserRequestDTO userRequest) {
         User savedUser = new User(userRequest.getUsername(), userRequest.getPassword());
         userRepository.save(savedUser);
     }
