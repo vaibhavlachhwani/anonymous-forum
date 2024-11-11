@@ -1,17 +1,12 @@
-# Community Forum
+# Backend for Community Forum
 
-This project is a community forum with a Spring Boot backend and a frontend in HTML, CSS, and JavaScript. Users can register, create posts, and add comments. Each post displays its content along with comments from various users.
+This project is a community forum with a Spring Boot backend. Created for HealConnect, a one-stop personal Mental Health website submitted in Odoo x Amalthea Hackathon held at IIT Gandhinagar on Nov 9, 2024 by my team Team Twix. Users can register, create posts, and add comments. Each post displays its content along with comments from various users.
 
 ## Features
 - Register a new user
 - View all posts or individual post details
 - Create a new post (requires username and password)
 - Add comments to a post (requires username and password)
-
-## Color Palette
-- **Primary**: #006953
-- **Secondary**: #A9C7B8
-- **Background**: #F7F6F2
 
 ## API Endpoints
 
@@ -43,7 +38,3 @@ Below is a list of available API endpoints and their usage.
 
 1. **Backend**:
    - Set up and start the Spring Boot application to serve API requests.
-
-2. **Frontend**:
-   - Open the `index.html` file in a browser to interact with the forum’s UI.
-
